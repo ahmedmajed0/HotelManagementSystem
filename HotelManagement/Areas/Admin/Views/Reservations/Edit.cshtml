@@ -1,0 +1,130 @@
+﻿@model TbReservations
+
+@{
+    ViewData["Title"] = "Edit Reservation";
+}
+
+<div style="margin-bottom:100px" class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <div class="breadcrumb-wrapper col-12">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">Guests</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <!-- Basic Horizontal form layout section start -->
+            <section id="basic-horizontal-layouts">
+                <div class="row match-height">
+                    <div class="col-md-12 col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Rservation</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <form class="form form-horizontal" method="post" asp-controller="Reservations" asp-action="Edit">
+                                        <div class="form-body">
+                                            <div class="row">
+
+                                                <input asp-for="ReservationId" type="hidden" />
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-8">
+                                                            <label>Meels</label>
+                                                            <select asp-for="MeelId" asp-items="@(new SelectList(ViewBag.Meels,"MeelId","MeelName"))" class="form-control">
+                                                                <option value="">------</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-8">
+                                                            <label for="Adults">Number of Adults</label>
+                                                            <input asp-for="AdultsNo" type="number" class="form-control" id="Adults" placeholder="ex 5">
+                                                            <span asp-validation-for="AdultsNo" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-8">
+                                                            <label for="Kids">Number of Kids (If there are any)</label>
+                                                            <input asp-for="ChildNo" type="number" class="form-control" id="Kids" placeholder="ex 5">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-8">
+                                                            <label>Arrival - Date andTime</label>
+                                                            <input asp-for="ArrivingDate" type="date" class="form-control" placeholder="MM-DD-YYYY">
+                                                            <span asp-validation-for="ArrivingDate" class="text-danger"></span>
+                                                            <span class="text-danger">@ViewBag.ArrivingError</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-8">
+                                                            <label>Departure - Date and Time</label>
+                                                            <input asp-for="LeavingDate" type="date" class="form-control" placeholder="MM-DD-YYYY">
+                                                            <span asp-validation-for="LeavingDate" class="text-danger"></span>
+                                                            <span class="text-danger">@ViewBag.LeavingError</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-8">
+                                                            <label>Discount</label>
+                                                            <input asp-for="Discount" type="number" class="form-control" placeholder="0">
+                                                            <span asp-validation-for="Discount" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-md-12 text-center">
+                                                    <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

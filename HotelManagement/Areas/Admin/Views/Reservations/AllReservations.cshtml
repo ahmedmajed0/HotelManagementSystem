@@ -1,0 +1,97 @@
+﻿
+@model List<TbReservations>
+
+@{
+    ViewData["Title"] = "All Reservations";
+}
+
+<div class="wrapper">
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Reservations</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item active">Reservations</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">All Reservations</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr class="bg-primary text-white">
+                                        <th>Client Id</th>
+                                        <th>Meel Id</th>
+                                        <th>Adults Number</th>
+                                        <th>Child Number</th>
+                                        <th>Nights</th>
+                                        <th>Arriving Date</th>
+                                        <th>Departure Date</th>
+                                        <th>Discount</th>
+                                        <th>Total Price</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var reservation in Model)
+                                    {
+                                        <tr>
+                                            <td>@reservation.ClientId</td>
+                                            <td>@reservation.MeelId</td>
+                                            <td>@reservation.AdultsNo</td>
+                                            <td>@reservation.ChildNo<span class="tag tag-success"></span></td>
+                                            <td>@reservation.Nights</td>
+                                            <td>@reservation.ArrivingDate.ToShortDateString()</td>
+                                            <td>@reservation.LeavingDate.ToShortDateString()</td>
+                                            <td>@reservation.Discount</td>
+                                            <td>@reservation.TotalPrice</td>
+                                            <td>
+                                                <a asp-controller="Reservations" asp-action="Edit" asp-route-Id="@reservation.ReservationId" style="width:98.91px;" class="btn btn-info">Edit</a>
+                                                <a asp-controller="Reservations" asp-action="CheckOutReservation" asp-route-reservationId="@reservation.ReservationId" class="btn btn-danger">Check out</a>
+                                                <!--<a asp-controller="Reservations" asp-action="DoneReservation" asp-route-Id="@reservation.ReservationId" class="btn btn-danger">Delete</a>-->
+                                            </td>
+                                        </tr>
+
+                                    }
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+</div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+
+
+
+</div>
+<!-- ./wrapper -->
+

@@ -1,0 +1,139 @@
+﻿@model TbFood
+
+@{
+    ViewData["Title"] = "Add Food";
+}
+
+<div class="content-wrapper">
+    <div class="content-header row">
+        <div class="content-header-left col-md-9 col-12 mb-2">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a asp-controller="MeelsFood" asp-action="AllFoods">Foods</a>
+                            </li>
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <!-- Basic Horizontal form layout section start -->
+        <section id="basic-horizontal-layouts">
+            <div class="row match-height">
+                <div class="col-md-12 col-12">
+                    <div>
+                        <div class="card-header">
+                            <h4 class="card-title">Add New Item</h4>
+                        </div>
+                        <div>
+                            <div class="card-body">
+                                <form class="form form-horizontal" method="post" role="form" asp-controller="MeelsFood" enctype="multipart/form-data"
+                                      asp-action="AddFood">
+                                    <div class="form-body">
+                                        <div class="row">
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-8">
+                                                        @if (Model == null)
+                                                        {
+                                                            <input type="hidden" asp-for="FoodId" value="0" class="form-control">
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="hidden" asp-for="FoodId" class="form-control">
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Food Name</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" asp-for="FoodName" class="form-control" placeholder="Food Name">
+                                                        <span asp-validation-for="FoodName" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Price</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" asp-for="FoodPrice" class="form-control" placeholder="Price">
+                                                        <span asp-validation-for="FoodPrice" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Category</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.Categories,"CategoryId","CategoryName"))" class="form-control">
+                                                            <option value="">-- Select Category --</option>
+                                                        </select>
+                                                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Food Image</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="file" name="Files" asp-for="FoodImage" class="form-control" placeholder="Food Image">
+                                                        @*<span asp-validation-for="FoodImage" class="text-danger"></span>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Description</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="Text" asp-for="FoodDescription" class="form-control" placeholder="Description">
+                                                        <span asp-validation-for="FoodDescription" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 text-center">
+                                                <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

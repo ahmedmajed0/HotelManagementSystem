@@ -1,0 +1,204 @@
+﻿
+@model HomePageModel
+
+
+
+
+
+<!-- Start BEst Seller Area -->
+<section class="wn__product__area brown--color pt--80  pb--30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section__title text-center">
+                    <h2 class="title__be--2">Check <span class="color--theme">Availability</span></h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <form asp-controller="Home" asp-action="AvailableRoomsList" method="post" role="form">
+                    <div class="d-flex justify-content-center pb--30">
+                        <input asp-for="checkRoom.ArrivingDate" type="date" class="form-control pr-4" placeholder="Chck in date" />
+
+                        <input asp-for="checkRoom.LeavingDate" type="date" class="form-control pr-4" placeholder="Chck out date" />
+
+                        <input asp-for="checkRoom.BedsNumber" type="number" class="form-control pr-4" placeholder="Number of Beds" />
+
+                    </div>
+                    <div>
+                        <span asp-validation-for="checkRoom.ArrivingDate" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <span asp-validation-for="checkRoom.LeavingDate" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <span asp-validation-for="checkRoom.BedsNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-primary btn-lg" style="width:300px">Check</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+        <!-- End Single Tab Content -->
+    </div>
+</section>
+
+
+<!-- Start BEst Seller Area -->
+<section class="wn__product__area brown--color pt--80  pb--30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section__title text-center">
+                    <h2 class="title__be--2">Available <span class="color--theme">Rooms</span></h2>
+                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form</p>
+                </div>
+            </div>
+        </div>
+        <!-- Start Single Tab Content -->
+        <div class="furniture--4 border--round arrows_style owl-carousel owl-theme row mt--50">
+
+            @foreach (var room in Model.listCoupleRooms)
+            {
+                <partial name="_Room" model="@room" />
+            }
+
+
+        </div>
+        <!-- End Single Tab Content -->
+    </div>
+</section>
+<!-- Start BEst Seller Area -->
+
+<div class="fixed-bg bg-1" style="background-attachment: fixed;
+      background-repeat: no-repeat; background-size: cover;
+      background-position: center center; height: 400px; width: 100%;
+      color: white; text-align: center; display: table;
+      background-image: url('https://www.dl.dropboxusercontent.com/s/dk3s266jb5klmba/bg1.jpg'); ">
+    <h1 style=" display: table-cell; vertical-align: middle;">Enjoy Your life</h1>
+</div>
+
+
+
+<!-- Start Best Seller Area -->
+<section class="wn__bestseller__area bg--white pt--80  pb--30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section__title text-center">
+                    <h2 class="title__be--2">All <span class="color--theme">Rooms</span></h2>
+                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt--50">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <div class="product__nav nav justify-content-center" role="tablist">
+                    <a class="nav-item nav-link active" data-toggle="tab" href="#nav-all" role="tab">ALL</a>
+
+                    @foreach (var view in Model.listviews)
+                    {
+                        <a class="nav-item nav-link" data-toggle="tab" href="@string.Format("#nav-{0}",view.RoomView)" role="tab">@view.RoomView</a>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+        <div class="tab__container mt--60">
+            <!-- Start Single Tab Content -->
+            <div class="row single__tab tab-pane fade show active" id="nav-all" role="tabpanel">
+                <div class="product__indicator--4 arrows_style owl-carousel owl-theme">
+
+                    
+                    @for(int i = 0; i < Model.listAllRooms.Count()/2; i++)
+                    {
+                    <div class="single__product">
+
+                        <!--first Start Single Product -->
+                        <partial name="_Room" model="@Model.listAllRooms[i]" />
+                        <!-- Start Single Product -->
+
+                        <!-- end Start Single Product -->
+                        <partial name="_Room" model="@Model.listAllRooms[Model.listAllRooms.Count()-i-1]" />
+                        <!-- Start Single Product -->
+                    </div>
+                        
+                    }
+
+
+                </div>
+            </div>
+            <!-- End Single Tab Content -->
+            <!-- Start Single Tab Content -->
+            @foreach (var view in Model.listviews)
+            {
+                <div class="row single__tab tab-pane fade" id="@string.Format("nav-{0}",view.RoomView)" role="tabpanel">
+                    <div class="product__indicator--4 arrows_style owl-carousel owl-theme">
+
+                        @foreach (var room in Model.listAllRooms.Where(a => a.RoomView == view.RoomView))
+                        {
+                            <partial name="_Room" model="@room" />
+
+                        }
+
+
+                    </div>
+                </div>
+
+            }
+
+
+        </div>
+    </div>
+</section>
+<!-- Start BEst Seller Area -->
+
+
+
+<div class="fixed-bg bg-1" style="background-attachment: fixed; background-repeat: no-repeat; background-size: cover; background-position: center center; height: 400px; width: 100%; color: white; text-align: center; display: table; background-image: url('https://cdn.wallpapersafari.com/48/71/ldeaJz.jpg'); ">
+    <h1 style=" display: table-cell; vertical-align: middle;">Enjoy Your life</h1>
+</div>
+
+
+<section class="wn__product__area brown--color pt--80  pb--30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section__title text-center">
+                    <h2 class="title__be--2">Big <span class="color--theme">Rooms</span></h2>
+                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form</p>
+                </div>
+            </div>
+        </div>
+        <!-- Start Single Tab Content -->
+        <div class="furniture--4 border--round arrows_style owl-carousel owl-theme row mt--50">
+
+            @foreach (var room in Model.listBigRooms)
+            {
+                <partial name="_Room" model="@room" />
+            }
+
+
+        </div>
+        <!-- End Single Tab Content -->
+    </div>
+</section>
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

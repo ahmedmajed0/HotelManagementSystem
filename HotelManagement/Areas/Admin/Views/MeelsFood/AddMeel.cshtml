@@ -1,0 +1,123 @@
+﻿@model TbMeels
+
+@{
+    ViewData["Title"] = "Add Meal";
+}
+
+<div class="content-wrapper">
+    <div class="content-header row">
+        <div class="content-header-left col-md-9 col-12 mb-2">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a asp-controller="MeelsFood" asp-action="AddMeel">Meals</a>
+                            </li>
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <!-- Basic Horizontal form layout section start -->
+        <section id="basic-horizontal-layouts">
+            <div class="row match-height">
+                <div class="col-md-12 col-12">
+                    <div>
+                        <div class="card-header">
+                            <h4 class="card-title">Add New Meal</h4>
+                        </div>
+                        <div>
+                            <div class="card-body">
+                                <form class="form form-horizontal" method="post" asp-controller="MeelsFood"
+                                      asp-action="AddMeel">
+                                    <div class="form-body">
+                                        <div class="row">
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-8">
+                                                        @if (Model == null)
+                                                        {
+                                                            <input type="hidden" asp-for="MeelId" value="0" class="form-control">
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="hidden" asp-for="MeelId" class="form-control">
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Meal Name</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" asp-for="MeelName" class="form-control" placeholder="Meal Name">
+                                                        <span asp-validation-for="MeelName" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Meal Time</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" asp-for="MeelTime" class="form-control" placeholder="Meal Time">
+                                                        <span asp-validation-for="MeelTime" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Details</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" asp-for="MeelDetails" class="form-control" placeholder="Details">
+                                                        <span asp-validation-for="MeelDetails" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Price</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="Text" asp-for="MeelPrice" class="form-control" placeholder="Price">
+                                                        <span asp-validation-for="MeelPrice" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 text-center">
+                                                <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

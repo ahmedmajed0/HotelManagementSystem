@@ -1,0 +1,226 @@
+﻿@model TbRooms
+
+@{
+    ViewData["Title"] = "Add Room";
+}
+
+
+<div class="content-wrapper">
+    <div class="content-header row">
+        <div class="content-header-left col-md-9 col-12 mb-2">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a asp-controller="Rooms" asp-action="AllRooms">Rooms</a>
+                            </li>
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <!-- Basic Horizontal form layout section start -->
+        <section id="basic-horizontal-layouts">
+            <div class="row match-height">
+                <div class="col-md-12 col-12">
+                    <div>
+                        <div class="card-header">
+                            <h4 class="card-title">Add New Item</h4>
+                        </div>
+                        <div>
+                            <div class="card-body">
+                                <form class="form form-horizontal" method="post" role="form" asp-controller="Rooms" enctype="multipart/form-data"
+                                      asp-action="AddRoom">
+                                    <div class="form-body">
+                                        <div class="row">
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-8">
+                                                        @if (Model == null)
+                                                        {
+                                                            <input type="hidden" asp-for="RoomId" value="0" class="form-control">
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="hidden" asp-for="RoomId" class="form-control">
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Room cleaner</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select asp-for="EmployeeId" asp-items="@(new SelectList(ViewBag.HouseKeeping,"EmployeeId","EmployeeName"))" class="form-control">
+                                                            <option value="">-- Select Employee --</option>
+                                                        </select>
+                                                        <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Room Floor</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" asp-for="RoomFloor" class="form-control" placeholder="Room Floor">
+                                                        <span asp-validation-for="RoomFloor" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Room Number</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" asp-for="RoomNo" class="form-control" placeholder="Room Number">
+                                                        <span asp-validation-for="RoomNo" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>View</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select asp-for="ViewId" asp-items="@(new SelectList(ViewBag.Views,"ViewId","ViewName"))" class="form-control">
+                                                            <option value="">-- Select View --</option>
+                                                        </select>
+                                                        <span asp-validation-for="ViewId" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Room Image</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="file" name="Files" asp-for="ImageName" class="form-control" placeholder="Image">
+                                                        <span class="text-danger">
+                                                            @if (ViewBag.ImageError != null)
+                                                            {
+                                                                @ViewBag.ImageError
+                                                            }
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Price per Night</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="Text" asp-for="RoomPrice" class="form-control" placeholder="Room Price">
+                                                        <span asp-validation-for="RoomPrice" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Persons Number</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="Text" asp-for="NoOfPersons" class="form-control" placeholder="No Of Persons">
+                                                        <span asp-validation-for="NoOfPersons" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Beds Number</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="Text" asp-for="NoOfBeds" class="form-control" placeholder="No Of Beds">
+                                                        <span asp-validation-for="NoOfBeds" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Status</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select asp-for="Status" class="form-control">
+                                                            <option value="">-- Select Status --</option>
+                                                            <option value="Available">Available</option>
+                                                            <option value="Checked">Checked</option>
+                                                        </select>
+                                                        <span asp-validation-for="Status" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>ShortDes</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="Text" asp-for="ShortDescription" class="form-control" placeholder="Short Description">
+                                                        <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>LongDes</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="Text" asp-for="LongDescription" class="form-control" placeholder="Long Description">
+                                                        <span asp-validation-for="LongDescription" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 text-center">
+                                                <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

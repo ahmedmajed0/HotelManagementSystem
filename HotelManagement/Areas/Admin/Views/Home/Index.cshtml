@@ -1,0 +1,321 @@
+﻿@model HomePageVwModel
+
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> signInManager
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+
+
+<div class="content-wrapper">
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Dashboard</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <!-- start Admin boxes  -->
+            @if (User.IsInRole(Roles.Admin.ToString()))
+            {
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>@Model.Admin.UsersNo</h3>
+
+                                <p>System Users</p>
+                            </div>
+                            <div class="icon">
+                               
+                            </div>
+                            <a asp-controller="Users" asp-action="AllUsers" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>@Model.Admin.RolesNo</h3>
+
+                                <p>Roles number</p>
+                            </div>
+                            <div class="icon">
+                                
+                            </div>
+                            <a asp-controller="Roles" asp-action="AllRoles" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>@Model.Admin.EmployeesNo</h3>
+
+                                <p>Employees number</p>
+                            </div>
+                            <div class="icon">
+                                
+                            </div>
+                            <a asp-controller="Employees" asp-action="AllEmployees" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>@Model.Admin.RoomsNo</h3>
+
+                                <p>Rooms number</p>
+                            </div>
+                            <div class="icon">
+                                
+                            </div>
+                            <a asp-controller="Rooms" asp-action="AllRooms" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                </div>
+            }
+            <!--end Admin boxes-->
+
+
+
+            <!-- start DataEntry boxes  -->
+            @if (User.IsInRole(Roles.DataEntry.ToString()) && !User.IsInRole(Roles.Admin.ToString()))
+            {
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>@Model.DataEntry.SuppliersNo</h3>
+
+                                <p>Suppliers number</p>
+                            </div>
+                            <div class="icon">
+                                
+                            </div>
+                            <a asp-controller="Suppliers" asp-action="AllSuppliers" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>@Model.DataEntry.MealsNo</h3>
+
+                                <p>Meals number</p>
+                            </div>
+                            <div class="icon">
+                                
+                            </div>
+                            <a asp-controller="Meels" asp-action="AllMeels" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>@Model.DataEntry.ViewsNo</h3>
+
+                                <p>Views number</p>
+                            </div>
+                            <div class="icon">
+                               
+                            </div>
+                            <a asp-controller="Rooms" asp-action="AllViews" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>@Model.DataEntry.RoomsNo</h3>
+
+                                <p>Rooms number</p>
+                            </div>
+                            <div class="icon">
+                                
+                            </div>
+                            <a asp-controller="Rooms" asp-action="AllRooms" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                </div>
+            }
+            <!--end DataEntry boxes-->
+
+
+
+            <!-- start Restaurant boxes  -->
+            @if (User.IsInRole(Roles.Restaurant.ToString()) && !User.IsInRole(Roles.Admin.ToString()))
+            {
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>@Model.Restaurant.FoodNo</h3>
+
+                                <p>Food number</p>
+                            </div>
+                            <div class="icon">
+                           
+                            </div>
+                            <a asp-controller="MeelsFood" asp-action="AllFoods" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>@Model.Restaurant.OrdersNo</h3>
+
+                                <p>New Orders</p>
+                            </div>
+                            <div class="icon">
+
+                            </div>
+                            <a asp-controller="Orders" asp-action="NormalOrders" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                </div>
+            }
+            <!--end Restaurant boxes-->
+
+
+
+            <!-- start Receptionist boxes  -->
+            @if (User.IsInRole(Roles.Receptionist.ToString()) && !User.IsInRole(Roles.Admin.ToString()))
+            {
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>@Model.Receptionist.ReservationsNo</h3>
+
+                                <p>Reservations number</p>
+                            </div>
+                            <div class="icon">
+                            </div>
+                            <a asp-controller="Reservations" asp-action="AllReservations" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>@Model.Receptionist.GuestsNo</h3>
+
+                                <p>Guests number</p>
+                            </div>
+                            <div class="icon">
+                            </div>
+                            <a asp-controller="Reports" asp-action="GuestsReport" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>@Model.Receptionist.CheckedRooms</h3>
+
+                                <p>Checked Rooms</p>
+                            </div>
+                            <div class="icon">
+                            </div>
+                            <a asp-controller="Reports" asp-action="CheckedRooms" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>@Model.Receptionist.AvailableRooms</h3>
+
+                                <p>Available Rooms</p>
+                            </div>
+                            <div class="icon">
+                            </div>
+                            <a asp-controller="Reports" asp-action="AvailableRooms" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                </div>
+            }
+            <!--end Receptionist boxes-->
+
+
+
+
+            <!-- start basicuser boxes  -->
+            @if (User.IsInRole(Roles.Receptionist.ToString()) && !User.IsInRole(Roles.Admin.ToString()))
+            { 
+
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>@Model.BasicUser.RoomsServRequests</h3>
+
+                                <p>Rooms Service Requests</p>
+                            </div>
+                            <div class="icon">
+                            </div>
+                            <a asp-controller="RoomService" asp-action="AllRequests" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>@Model.BasicUser.CheckedRooms</h3>
+
+                                <p>Checked Rooms</p>
+                            </div>
+                            <div class="icon">
+                            </div>
+                            <a asp-controller="Reports" asp-action="CheckedRooms" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                </div>
+            }
+            <!--end basicuser boxes-->
+
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

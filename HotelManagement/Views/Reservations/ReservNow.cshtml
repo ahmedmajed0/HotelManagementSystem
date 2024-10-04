@@ -1,0 +1,121 @@
+﻿@model ReservationPageModel
+
+
+
+
+
+
+<h1 class="m-5 text-center" style=" margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; ">Room number : @Model.RoomNo</h1>
+<h3 class="m-5 text-center" style=" margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; ">Night Price : @ViewBag.RoomPrice</h3>
+
+
+<div class="page-shop-sidebar left--sidebar bg--white">
+    <div class="container d-flex justify-content-center">
+        <div class="row">
+
+
+
+            <form method="post" role="form" asp-controller="Reservations" asp-action="ReservNow">
+                <input asp-for="RoomId" type="hidden">
+
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input asp-for="Client.ClientName" type="text" class="form-control" placeholder="Enter Full Name">
+                    <span asp-validation-for="Client.ClientName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Nationality</label>
+                    <input asp-for="Client.Nationality" type="text" class="form-control" placeholder="ex: Egyption">
+                    <span asp-validation-for="Client.Nationality" class="text-danger"></span>
+                </div>
+
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Gender">Gender</label>
+                        <select asp-for="Client.Gender" class="form-control">
+                            <option value="">------</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <span asp-validation-for="Client.Gender" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="City">City</label>
+                        <input asp-for="Client.City" type="text" class="form-control" id="City" placeholder="Enter City">
+                        <span asp-validation-for="Client.City" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="contain form-group">
+                    <label>Phone Number</label>
+                    <input asp-for="Client.Phone" type="text" class="form-control" placeholder="(000) 000-0000">
+                    <span asp-validation-for="Client.Phone" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Arrival - Date andTime</label>
+                    <input asp-for="Reservation.ArrivingDate" type="date" class="form-control" placeholder="MM-DD-YYYY">
+                    <span asp-validation-for="Reservation.ArrivingDate" class="text-danger"></span>
+                    <span class="text-danger">@ViewBag.ArrivingError</span>
+                </div>
+
+
+
+                <div class="contain form-group">
+                    <label>Departure - Date and Time</label>
+                    <input asp-for="Reservation.LeavingDate" type="date" class="form-control" placeholder="MM-DD-YYYY">
+                    <span asp-validation-for="Reservation.LeavingDate" class="text-danger"></span>
+                    <span class="text-danger">@ViewBag.LeavingError</span>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Adults">Number of Adults</label>
+                        <input asp-for="Reservation.AdultsNo" type="number" class="form-control" id="Adults" placeholder="ex 5">
+                        <span asp-validation-for="Reservation.AdultsNo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Kids">Number of Kids </label>
+                        <input asp-for="Reservation.ChildNo" type="number" value="0" class="form-control" id="Kids" placeholder="ex 5">
+                    </div>
+                </div>
+
+
+                <div class="contain form-group">
+                    <label>Meels</label>
+                    <select asp-for="Reservation.MeelId" asp-items="@(new SelectList(ViewBag.Meels,"MeelId","MeelName"))" class="form-control">
+                        <option value="">------</option>
+                    </select>
+                </div>
+
+
+                <div class="contain form-group">
+                    <label>Discount</label>
+                    <input asp-for="Reservation.Discount" value="0" type="number" class="form-control" placeholder="0">
+                    <span asp-validation-for="Reservation.AdultsNo" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Go to Checkout</button>
+
+
+            </form>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

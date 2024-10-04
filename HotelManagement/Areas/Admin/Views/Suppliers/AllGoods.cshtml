@@ -1,0 +1,144 @@
+﻿@model List<TbSupplierGoods>
+
+@{
+    ViewData["Title"] = "All Goods";
+}
+
+<div class="content-wrapper" style="min-height: 1016.95px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Suppliers Goods</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Suppliers Goods</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div id="alert" class="alert alert-success alert-dismissible fade show d-none" role="alert">
+                            deleted successfuly.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="card-header">
+                            <a asp-controller="Suppliers" asp-action="AddGoods" class="btn btn-success">New</a>
+
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="bg-primary text-white">
+                                        <th>Supplier Name</th>
+                                        <th>Category</th>
+                                        <th>Quantity</th>
+                                        <th>Amount Unit</th>
+                                        <th>Total Price</th>
+                                        <th>Date Of Arrival</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var supGoods in Model)
+                                    {
+                                        <tr>
+                                            <td>@supGoods.SupplierrName</td>
+                                            <td>@supGoods.Category</td>
+                                            <td>@supGoods.Quantity</td>
+                                            <td><span class="tag tag-success">@supGoods.QuantityUnit</span></td>
+                                            <td>@supGoods.Price</td>
+                                            <td>@supGoods.DateOfArrival.ToShortDateString()</td>
+                                            <td>
+                                                <a asp-controller="Suppliers" asp-action="AddGoods" style="width:72.61px;" asp-route-Id="@supGoods.SupplierGoodId"
+                                                   class="btn btn-info">Edit</a>
+                                                <a href="javascript:;" class="btn btn-danger js-delete" data-id="@supGoods.SupplierGoodId">Delete</a>
+                                            </td>
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+@section Scripts
+{
+    <script>
+
+
+            $(document).ready(function () {
+                $('.js-delete').on('click', function () {
+                    var btn = $(this);
+
+
+                    bootbox.confirm({
+                        message: "Are you sure that you need to delete this row",
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-danger'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-secondary'
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: '/api/ApiSupplierGoods/?Id=' + btn.data('id'),
+                                    method: 'DELETE',
+                                    success: function () {
+                                        btn.parents('tr').fadeOut();
+                                        $('#alert').removeClass('d-none');
+
+                                        setTimeout(function () { $('#alert').addClass('d-none'); }, 9000)
+                                    },
+                                    error: function () {
+
+                                        alert('Somthing went wrong');
+                                    }
+                                })
+                            }
+                        }
+                    });
+                })
+            })
+    </script>
+
+}

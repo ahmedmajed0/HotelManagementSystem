@@ -1,0 +1,89 @@
+﻿@model RoomModel
+
+<!-- Start main Content -->
+<div class="maincontent bg--white pt--80 pb--55">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-12">
+                <div class="wn__single__product">
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <div class="wn__fotorama__wrapper">
+                                <div class="fotorama wn__fotorama__action" data-nav="thumbs">
+                                    <a href="1.jpg"><img src="@string.Format("/Uploads/{0}",Model.SingleRoom.ImageName)" alt=""></a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="product__info__main">
+                                <h1>@Model.SingleRoom.NoOfBeds  <span class="color--theme">Bed for </span> @Model.SingleRoom.NoOfPersons <span class="color--theme"> Persons </span> </h1>
+
+
+                                <div class="price-box">
+                                    <span class="color--theme" >@Model.SingleRoom.RoomPrice  <span class="color--theme pt-3">Per Night</span></span>
+                                </div>
+                                <div class="product__overview">
+                                    <p>@Model.SingleRoom.ShortDescription Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. </p>
+                                </div>
+                                <div class="box-tocart d-flex pt-4">
+                                    <div class="addtocart__actions">
+                                        <a style="background-color :#e59285; color:white;" class="btn" asp-controller="Reservations" asp-action="ReservNow" asp-route-Id="@Model.SingleRoom.RoomId">Reserve Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product__info__detailed">
+                    <div class="pro_details_nav nav justify-content-start" role="tablist">
+                        <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">Details</a>
+                    </div>
+                    <div class="tab__container">
+                        <!-- Start Single Tab Content -->
+                        <div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
+                            <div class="description__attribute">
+                                <p> @Model.SingleRoom.LongDescription Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.</p>
+
+                            </div>
+                        </div>
+                        <!-- End Single Tab Content -->
+                    </div>
+                </div>
+
+
+
+
+                <div class="wn__related__product pt--80 pb--50">
+                    <div class="section__title text-center">
+                        <h2 class="title__be--2">Related  <span class="color--theme">Rooms </span></h2>
+                    </div>
+                    <div class="row mt--60">
+                        <div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
+
+                            @foreach(var room in Model.lstRelatedRooms)
+                            {
+                                <partial name="_Room" model="@room" />
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="wn__related__product">
+                    <div class="section__title text-center">
+                        <h2 class="title__be--2">Big <span class="color--theme">Rooms </span></h2>
+                    </div>
+                    <div class="row mt--60">
+                        <div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
+                            @foreach (var room in Model.lstBigRooms)
+                            {
+                                <partial name="_Room" model="@room" />
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End main Content -->

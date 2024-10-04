@@ -1,0 +1,80 @@
+﻿@model List<VwRoomEmployee>
+
+@{
+    ViewData["Title"] = "Housekeeping";
+}
+
+<div class="wrapper">
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>General HouseKeeping Report</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item active">General HouseKeeping</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+
+
+                    <div class="card">
+                        <div class="card-header">
+                            <button style="width:100px" class="card-title text-center btn btn-info">Print All</button>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr class="bg-primary text-white">
+                                        <th>Employee Number</th>
+                                        <th>EmployeeName</th>
+                                        <th>Room Number</th>
+                                        <th>Number of Beds</th>
+                                        <th>Persons Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var emp in Model)
+                                    {
+                                        <tr>
+                                            <td>@emp.EmployeeNo</td>
+                                            <td>@emp.EmployeeName</td>
+                                            <td>@emp.RoomNo</td>
+                                            <td>@emp.NoOfBeds</td>
+                                            <td>@emp.NoOfPersons</td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+
+
+
+</div>
+<!-- ./wrapper -->

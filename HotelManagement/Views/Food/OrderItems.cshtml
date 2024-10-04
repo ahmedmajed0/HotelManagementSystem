@@ -1,0 +1,103 @@
+﻿@model OrderMenu
+
+
+<!-- cart-main-area start -->
+<div class="cart-main-area section-padding--lg bg--white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ol-lg-12">
+                <form action="#">
+                    <div class="table-content wnro__table table-responsive">
+                        <table>
+                            <thead>
+                                <tr class="title-top">
+                                    <th class="product-thumbnail">Image</th>
+                                    <th class="product-name">Food</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-subtotal">Total</th>
+                                    <th class="product-remove">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var food in Model.listOrders)
+
+                                {
+                                    <tr>
+                                        <td class="product-thumbnail">
+                                            <a asp-controller="Food" asp-action="SingleFood" asp-route-id="@food.FoodId">
+                                                <img src="@string.Format("/Uploads/{0}",food.Image)" alt="product img">
+                                            </a>
+                                        </td>
+                                        <td class="product-name">
+                                            <a asp-controller="Food" asp-action="SingleFood" asp-route-id="@food.FoodId">
+                                                @food.FoodName
+                                            </a>
+                                        </td>
+                                        <td class="product-price"><span class="amount">@food.Price</span></td>
+                                        <td class="product-quantity"><input class="CartInput" type="number" data-price="@food.Price" onkeyup="ChangeQty(this);" value="@food.qty"></td>
+                                        <td class="product-subtotal">@food.Total</td>
+                                        <td class="product-remove"><a asp-controller="Food" asp-action="RemoveOrderItem" asp-route-id="@food.FoodId">X</a></td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+                <div class="cartbox__btn">
+                    <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+
+                        <li><a asp-controller="Food" asp-action="FoodList">Add more food</a></li>
+                        <li><a asp-controller="Food" asp-action="SaveOrder" >Check Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 offset-lg-6">
+                <div class="cartbox__total__area">
+                    <div class="cartbox-total d-flex justify-content-between">
+                        <ul class="cart__total__list">
+                            <li>Cart total</li>
+                            <li>Sub Total</li>
+                        </ul>
+                        <ul class="cart__total__tk">
+                            <li id="total1">@Model.Total</li>
+                            <li id="total2">@Model.Total</li>
+                        </ul>
+                    </div>
+                    <div class="cart__total__amount">
+                        <span>Grand Total</span>
+                        <span id="total3">@Model.Total</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        function ChangeQty(input) {
+            let price = parseFloat($(input).data("price"));
+            $(input).closest("td").next("td").html(price * parseFloat($(input).val()));
+            UpdateTotals();
+        }
+
+        function UpdateTotals() {
+            let total = 0;
+            $(".CartInput").each(function (index, element) {
+                total += parseFloat($(element).val()) * parseFloat($(element).data("price"));
+            })
+
+            $("#total1").html(total);
+            $("#total2").html(total);
+            $("#total3").html(total);
+
+        }
+    </script>
+
+}
+<!-- cart-main-area end -->

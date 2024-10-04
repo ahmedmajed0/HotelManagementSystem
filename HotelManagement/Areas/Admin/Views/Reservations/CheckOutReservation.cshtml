@@ -1,0 +1,110 @@
+﻿@model CheckOutModel
+
+
+
+@{
+    ViewData["Title"] = "Check out";
+}
+<div class="wrapper">
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Room number : @Model.RoomNumber</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item active">Reservations</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Rooms Ocupancy Report</h3>
+                        </div>
+
+
+
+                        
+                        <form asp-controller="Reservations" asp-action="CheckOutNow" role="form" method="post">
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr class="bg-primary text-white">
+                                            <th>For</th>
+                                            <th>Price</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var order in Model.lstFoodUnpaid)
+                                        {
+                                            <tr>
+                                                <td>Food Order</td>
+                                                <td>@order.Price</td>
+                                                <td>@order.PaymentDate.ToShortDateString()</td>
+                                                <td>@order.PaymentStatus</td>
+                                            </tr>
+
+                                        }
+
+                                    </tbody>
+
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="2">Total</th>
+
+                                            <th colspan="2">@Model.lstFoodUnpaid.Sum(a => a.TotalPaidPrice)</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                            <input type="hidden" asp-for="RservationId" />
+                            <input type="hidden" asp-for="RoomNumber" />
+                            @foreach(var order in Model.lstFoodUnpaid)
+                            {
+                                Model.clFoodId = order.ClientFoodId;
+                                <input type="hidden" asp-for="clFoodId" />
+                                break;
+
+                            }
+                            
+                            <div class="col-md-12 text-center">
+
+                                <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Check Out</button>
+                            </div>
+                        </form>
+
+                        
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+
+
+
+</div>
+<!-- ./wrapper -->

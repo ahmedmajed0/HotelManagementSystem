@@ -1,0 +1,56 @@
+﻿@model TbClientFood
+
+
+<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+    <div class="container d-flex justify-content-center">
+        <div class="row">
+
+            <form method="post" role="form" asp-controller="Food" asp-action="SaveOrder">
+
+
+
+                <div class="form-group">
+                    <label>Room Number</label>
+                    <input asp-for="RoomNo" type="text" class="form-control" placeholder="Enter Full Name">
+                    <span asp-validation-for="RoomNo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input asp-for="GuestPhone" type="text" class="form-control" placeholder="ex: Egyption">
+                    <span asp-validation-for="GuestPhone" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <p>Click on the button if you don't need the order when done, determine time you want'</p>
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Determine time</button>
+                    <div id="demo" class="collapse">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Which Hour you want to recieve the order</label>
+                                <input asp-for="RecievingHour" value="0" type="number" class="form-control" placeholder="HH" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label f>Minutes</label>
+                                <input asp-for="RecievingMinutes" value="0"  type="number" class="form-control" placeholder="HH">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input asp-for="PM" type="text" value="PM" readonly class="form-control">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+

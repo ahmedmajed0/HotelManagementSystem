@@ -1,0 +1,76 @@
+﻿@model List<TbRooms>
+
+@{
+    ViewData["Title"] = "Available Rooms";
+}
+<div class="wrapper">
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Available Rooms</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item active">Available Rooms</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+
+
+                    <div class="card">
+                        <div class="card-header">
+                            <button style="width:100px" class="card-title text-center btn btn-info">Print All</button>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr class="bg-primary text-white">
+                                        <th>Room Number</th>
+                                        <th>Room Price</th>
+                                        <th>Room Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var room in Model)
+                                    {
+                                        <tr>
+                                            <td>@room.RoomNo</td>
+                                            <td>@room.RoomPrice</td>
+                                            <td>@room.Status</td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+
+
+
+</div>
+<!-- ./wrapper -->

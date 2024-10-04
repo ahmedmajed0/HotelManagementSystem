@@ -1,0 +1,155 @@
+﻿@model List<TbRooms>
+
+@{
+    ViewData["Title"] = "All Rooms";
+}
+
+<div class="content-wrapper" style="min-height: 1016.95px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>All Rooms</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active">All Rooms</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div id="alert" class="alert alert-success alert-dismissible fade show d-none" role="alert">
+                            deleted successfuly.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="card-header">
+                            <a asp-controller="Rooms" asp-action="AddRoom" class="btn btn-success">New</a>
+
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="bg-primary text-white">
+                                        <th>Room Cleaner</th>
+                                        <th>Room Floor</th>
+                                        <th>Room No</th>
+                                        <th>View</th>
+                                        <th>Image</th>
+                                        <th>Night Price</th>
+                                        <th>No Of Persons</th>
+                                        <th>Beds</th>
+                                        <th>Status</th>
+                                        <th>Short Desc</th>
+                                        <th>Long Desc</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var room in Model)
+                                    {
+                                        <tr>
+                                            <td>@room.RoomCleaner</td>
+                                            <td>@room.RoomFloor</td>
+                                            <td>@room.RoomNo</td>
+                                            <td>@room.RoomView</td>
+                                            <td>
+                                                <img src="@string.Format("/Uploads/{0}",room.ImageName)" width="60" height="60" />
+                                            </td>
+                                            <td>@room.RoomPrice</td>
+                                            <td>@room.NoOfPersons</td>
+                                            <td>@room.NoOfBeds</td>
+                                            <td>@room.Status</td>
+                                            <td><span class="tag tag-success">@room.ShortDescription</span></td>
+                                            <td><span class="tag tag-success">@room.LongDescription</span></td>
+                                            <td>
+                                                <a asp-controller="Rooms" asp-action="AddRoom" asp-route-Id="@room.RoomId" style="width:72.61px;" class="btn btn-info">Edit</a>
+                                                <a href="javascript:;" class="btn btn-danger js-delete" data-id="@room.RoomId">Delete</a>
+                                            </td>
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+@section Scripts
+{
+    <script>
+
+
+            $(document).ready(function () {
+                $('.js-delete').on('click', function () {
+                    var btn = $(this);
+
+
+                    bootbox.confirm({
+                        message: "Are you sure that you need to delete this room",
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-danger'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-secondary'
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: '/api/Rooms/?Id=' + btn.data('id'),
+                                    method: 'DELETE',
+                                    success: function () {
+                                        btn.parents('tr').fadeOut();
+                                        $('#alert').removeClass('d-none');
+
+                                        setTimeout(function () { $('#alert').addClass('d-none'); }, 3000)
+                                    },
+                                    error: function () {
+
+                                        alert('Somthing went wrong');
+                                    }
+                                })
+                            }
+                        }
+                    });
+                })
+            })
+    </script>
+
+}

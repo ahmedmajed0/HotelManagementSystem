@@ -1,0 +1,108 @@
+﻿
+@model NormalOrdersModel
+
+@{
+    ViewData["Title"] = "Food Orders";
+}
+
+
+<div class="content-wrapper" style="min-height: 1016.95px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Food Orders</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active">Food Orders</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            @if (Model.SampleOrders.Count() == 0 && Model.clientOrders.Count() == 0)
+                            {
+                                <h1 class="text-danger text-center fa-3x">No Food Orders</h1>
+
+                            }
+                            <table class="table table-hover">
+
+
+                                @foreach (var order in Model.SampleOrders)
+                                {
+
+                                    <thead>
+                                        <tr class="thead-dark">
+                                            <th scope="col" colspan="3">Room number : @order.RoomNo</th>
+                                            <th scope="col" colspan="3">phone : @order.GuestPhone</th>
+                                        </tr>
+                                        <tr>
+                                            <th>FoodName</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Total</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+
+                                    foreach (var ord in Model.clientOrders.Where(a => a.ClientFoodId == order.ClientFoodId))
+                                    {
+                                        <tbody>
+                                            <tr>
+                                                <td>@ord.FoodName</td>
+                                                <td>@ord.qty</td>
+                                                <td>@ord.Price</td>
+                                                <td>@ord.Total</td>
+                                                <td>@ord.Status</td>
+                                            </tr>
+                                        </tbody>
+
+                                    }
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="6" class="text-center">
+                                                <a asp-controller="Orders" asp-action="OrderDone" asp-route-ClFoodId="@order.ClientFoodId" class="btn btn-info">Done</a>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                }
+
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

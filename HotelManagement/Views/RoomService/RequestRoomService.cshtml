@@ -1,0 +1,76 @@
+﻿@model TbRoomService
+
+
+
+
+<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+    <div class="container d-flex justify-content-center">
+        <div class="row">
+
+
+
+            <form method="post" role="form" asp-controller="RoomService" asp-action="RequestRoomService">
+
+                @if (Model == null)
+                {
+                    <input type="hidden" asp-for="RoomServiceId" value="0" class="form-control">
+                }
+                else
+                {
+                    <input type="hidden" asp-for="RoomServiceId" class="form-control">
+                }
+
+
+                <div class="form-group">
+                    <label>Room Number</label>
+                    <input asp-for="RoomNo" type="number" class="form-control" placeholder="Enter Room number">
+                    <span asp-validation-for="RoomNo" class="text-danger"></span>
+                    <span asp-validation-for="RoomNo" class="text-danger">@ViewBag.RoomNotFound</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Cleaning Day</label>
+                    <select asp-for="CleaningDay" class="form-control">
+                        <option value="Today">Today</option>
+                        <option value="Tomorrow">Tomorrow</option>
+                    </select>
+                    <span asp-validation-for="CleaningDay" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Cleaning hour</label>
+                            <input asp-for="RecievingHour" type="number" class="form-control" placeholder="hour" />
+                            <span asp-validation-for="RecievingHour" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Time</label>
+                            <select asp-for="PM" class="form-control">
+                                <option value="PM">PM</option>
+                                <option value="AM">AM</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

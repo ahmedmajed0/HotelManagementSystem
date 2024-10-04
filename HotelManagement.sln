@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelManagement", "HotelManagement\HotelManagement.csproj", "{57458599-A1B1-41A8-8F78-02AC5EE455DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domains", "Domains\Domains.csproj", "{50742291-FDD4-459A-9820-68031EDD5FA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bl", "Bl\Bl.csproj", "{5E1A5465-0529-4BB2-904E-A9E6FD27942C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57458599-A1B1-41A8-8F78-02AC5EE455DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57458599-A1B1-41A8-8F78-02AC5EE455DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57458599-A1B1-41A8-8F78-02AC5EE455DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57458599-A1B1-41A8-8F78-02AC5EE455DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50742291-FDD4-459A-9820-68031EDD5FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50742291-FDD4-459A-9820-68031EDD5FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50742291-FDD4-459A-9820-68031EDD5FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50742291-FDD4-459A-9820-68031EDD5FA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E1A5465-0529-4BB2-904E-A9E6FD27942C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E1A5465-0529-4BB2-904E-A9E6FD27942C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E1A5465-0529-4BB2-904E-A9E6FD27942C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E1A5465-0529-4BB2-904E-A9E6FD27942C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {90052013-88B9-4C6F-AF16-82FEE3830924}
+	EndGlobalSection
+EndGlobal

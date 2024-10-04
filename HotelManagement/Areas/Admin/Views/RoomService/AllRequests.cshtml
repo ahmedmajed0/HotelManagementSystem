@@ -1,0 +1,142 @@
+﻿@model List<TbRoomService>
+
+@{
+    ViewData["Title"] = "Room Service Requests";
+}
+
+<div class="content-wrapper" style="min-height: 1016.95px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Cleaning Requests</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active">Cleaning Requests</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div id="alert" class="alert alert-success alert-dismissible fade show d-none" role="alert">
+                            deleted successfuly.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="card-header">
+                            <a asp-controller="RoomService" asp-action="RequestRoomService" class="btn btn-success">New</a>
+
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="bg-primary text-white">
+                                        <th>Room Number</th>
+                                        <th>Cleaning Day</th>
+                                        <th>Cleaning hour</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var request in Model)
+                                    {
+                                        <tr>
+                                            <td>@request.RoomNo</td>
+                                            <td>@request.CleaningDay</td>
+                                            <td> @string.Format("{0} : {1}", @request.PM, @request.RecievingHour)</td>
+                                            <td>@request.Status</td>
+
+                                            <td>
+                                                <a asp-controller="RoomService" asp-action="RequestRoomService" style="width:72.61px;" asp-route-id="@request.RoomServiceId"
+                                                   class="btn btn-info">Edit</a>
+                                                <a href="javascript:;" class="btn btn-danger js-delete" data-id="@request.RoomServiceId">Delete</a>
+                                            </td>
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+@section Scripts
+{
+    <script>
+
+
+            $(document).ready(function () {
+                $('.js-delete').on('click', function () {
+                    var btn = $(this);
+
+
+                    bootbox.confirm({
+                        message: "Are you sure that you need to delete this request?",
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-danger'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-secondary'
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: '/api/RoomService/?Id=' + btn.data('id'),
+                                    method: 'DELETE',
+                                    success: function () {
+                                        btn.parents('tr').fadeOut();
+                                        $('#alert').removeClass('d-none');
+
+                                        setTimeout(function () { $('#alert').addClass('d-none'); }, 3000)
+                                    },
+                                    error: function () {
+
+                                        alert('Somthing went wrong');
+                                    }
+                                })
+                            }
+                        }
+                    });
+                })
+            })
+    </script>
+
+}

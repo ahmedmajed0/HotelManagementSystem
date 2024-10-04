@@ -1,0 +1,127 @@
+﻿
+@model TbRoomService
+
+
+
+@{
+    ViewData["Title"] = "Cleaning Request";
+}
+
+<div class="content-wrapper">
+
+
+    <div class="content-body">
+        <!-- Basic Horizontal form layout section start -->
+        <section id="basic-horizontal-layouts">
+            <div class="row match-height">
+                <div class="col-md-12 col-12">
+                    <div>
+                        <div class="card-header">
+                            <h4 class="card-title">Add New Request</h4>
+                        </div>
+                        <div>
+                            <div class="card-body">
+                                <form class="form form-horizontal" method="post" role="form" asp-controller="RoomService" asp-action="RequestRoomService">
+                                    <div class="form-body">
+                                        <div class="row">
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-8">
+                                                        @if (Model == null)
+                                                        {
+                                                            <input type="hidden" asp-for="RoomServiceId" value="0" class="form-control">
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="hidden" asp-for="RoomServiceId" class="form-control">
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Room Number</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input asp-for="RoomNo" type="number" class="form-control" placeholder="Room Number">
+                                                        <span asp-validation-for="RoomNo" class="text-danger"></span>
+                                                        <span asp-validation-for="RoomNo" class="text-danger">@ViewBag.RoomNotFound</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Cleaning Day</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select asp-for="CleaningDay" class="form-control">
+                                                            <option value="Today">Today</option>
+                                                            <option value="Tomorrow">Tomorrow</option>
+                                                        </select>
+                                                        <span asp-validation-for="CleaningDay" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-2">
+                                                        <span>Time</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <input asp-for="RecievingHour" type="number" class="form-control" placeholder="hour" />
+                                                                <span asp-validation-for="RecievingHour" class="text-danger"></span>
+                                                            </div>
+
+                                                            <div class="col-6">
+                                                                <select asp-for="PM" class="form-control">
+                                                                    <option value="PM">PM</option>
+                                                                    <option value="AM">AM</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+                                            <div class="col-md-12 text-center">
+                                                <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+

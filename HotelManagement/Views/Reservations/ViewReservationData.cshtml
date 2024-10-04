@@ -1,0 +1,72 @@
+﻿@model VwAfterRoomReservation
+
+
+<!-- cart-main-area start -->
+<div class="cart-main-area section-padding--lg bg--white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ol-lg-12">
+                <form action="#">
+                    <div class="table-content wnro__table table-responsive">
+                        <table>
+                            <thead class="title-top bg-primary text-white">
+                                <tr class="title-top bg-primary text-white">
+                                    <th class="product-thumbnail">Guest</th>
+                                    <th class="product-name">Arriving</th>
+                                    <th class="product-price">Leaving</th>
+                                    <th class="product-quantity">Room floor</th>
+                                    <th class="product-subtotal">Room number</th>
+                                    <th class="product-remove">Room Password</th>
+                                    <th class="product-subtotal">Discount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="product-subtotal">@Model.ClientName</td>
+                                    <td class="product-subtotal">@Model.ArrivingDate.ToShortDateString()</td>
+                                    <td class="product-price"><span class="amount">@Model.LeavingDate.ToShortDateString()</span></td>
+                                    <!--<td class="product-quantity"><input class="CartInput" type="number"--> @*data-price="@food.Price" onkeyup="ChangeQty(this);" value="@food.qty"*@<!--></td>-->
+                                    <td class="product-subtotal">@Model.RoomFloor</td>
+                                    <td class="product-subtotal">@Model.RoomNo</td>
+                                    <td class="product-subtotal" >@Model.RoomPassword</td>
+                                    <td class="product-subtotal">@Model.Discount</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+                <div class="cartbox__btn">
+                    <ul class=" d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-center">
+
+                        <li class="pr-3"><a class="btn btn-primary text-white" style="width:90px;" asp-controller="Home" asp-action="Index">Done</a></li>
+                        <li class="pr-3"><a class="btn btn-outline-primary" style="width:90px;" asp-area="Admin" asp-controller="Reservations" asp-action="Edit" asp-route-Id="@Model.ReservationId">Edit</a></li>
+                        <li class="pr-3"><a class="btn btn-danger" style="width:90px;" asp-area="Admin" asp-controller="Reservations" asp-action="Delete" asp-route-Id="@Model.ReservationId">Delete</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 offset-lg-6">
+                <div class="cartbox__total__area">
+                    <div class="cartbox-total d-flex justify-content-between">
+                        <ul class="cart__total__list">
+                            <li>Total</li>
+                            <li>discount</li>
+                        </ul>
+                        <ul class="cart__total__tk">
+                            <li id="total1">@ViewBag.Total</li>
+                            <li id="total2">@Model.Discount</li>
+                        </ul>
+                    </div>
+                    <div style="background-color: #e59285;" class="cart__total__amount">
+                        <span class="text-white">Grand Total</span>
+                        <span id="total3" class="text-white">@(ViewBag.Total - Model.Discount) </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

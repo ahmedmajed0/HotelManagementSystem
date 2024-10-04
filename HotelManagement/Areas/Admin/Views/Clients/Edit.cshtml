@@ -1,0 +1,115 @@
+﻿@model TbClients
+
+@{
+    ViewData["Title"] = "Edit Guest";
+}
+
+<div class="content-wrapper">
+    <div class="content-header row">
+        <div class="content-header-left col-md-9 col-12 mb-2">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a asp-controller="Clients" asp-action="AllClients">Guests</a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <!-- Basic Horizontal form layout section start -->
+        <section id="basic-horizontal-layouts">
+            <div class="row match-height">
+                <div class="col-md-12 col-12">
+                    <div>
+                        <div class="card-header">
+                            <h4 class="card-title">Add New Item</h4>
+                        </div>
+                        <div>
+                            <div class="card-body">
+                                <form class="form form-horizontal" method="post" asp-controller="Clients" asp-action="Edit">
+                                    <div class="form-body">
+                                        <div class="row">
+
+                                            <input asp-for="ClientId" type="hidden" />
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <div class="col-md-8">
+                                                        <label for="client">Name</label>
+                                                        <input asp-for="ClientName" type="text" class="form-control" id="client" placeholder="ex 5">
+                                                        <span asp-validation-for="ClientName" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <div class="col-md-8">
+                                                        <label for="Nationality">Nationality</label>
+                                                        <input asp-for="Nationality" type="text" class="form-control" id="Nationality" placeholder="ex: Egyption">
+                                                        <span asp-validation-for="Nationality" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <div class="col-md-8">
+                                                        <label>Gender</label>
+                                                        <input asp-for="Gender" type="text" class="form-control" placeholder="MM-DD-YYYY">
+                                                        <span asp-validation-for="Gender" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <div class="col-md-8">
+                                                        <label>Phone</label>
+                                                        <input asp-for="Phone" type="text" class="form-control" placeholder="MM-DD-YYYY">
+                                                        <span asp-validation-for="Phone" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <div class="col-md-8">
+                                                        <label>City</label>
+                                                        <input asp-for="City" type="text" class="form-control" placeholder="MM-DD-YYYY">
+                                                        <span asp-validation-for="City" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="col-md-12 text-center">
+                                                <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
